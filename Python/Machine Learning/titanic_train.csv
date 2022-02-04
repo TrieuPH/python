@@ -1,0 +1,6 @@
+,Unnamed: 0,row.names,pclass,survived,name,age,embarked,home.dest,room,ticket,boat,sex
+0,998,999,3rd,1,"McCarthy, Miss Katie",NaN,NaN,NaN,NaN,NaN,NaN,female
+1,179,180,1st,0,"Millet, Mr Francis Davis",65,Southampton,"East Bridgewater, MA",NaN,NaN,-249,male
+2,556,557,2nd,0,"Sjostedt, Mr Ernst Adolf",59,Southampton,"Sault St Marie, ON",NaN,NaN,NaN,male
+3,174,175,1st,0,"McCaffry, Mr Thomas Francis",46,Cherbourg,"Vancouver, BC",NaN,NaN,-292,male
+4,1232,1233,3rd,0,"Strilic, Mr Ivan",NaN,NaN,NaN,NaN,NaN,NaN,male

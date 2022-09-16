@@ -15,13 +15,13 @@ def read_excel():
     max_por = df['Por'].max()
     #print(df.query("Por == %s" %max_por))
 
-    min_por = df['Por'].min()
+    min_por = df['Por'].min()   
     #print(df.query("Por == %s" %min_por))
     
     #print(datetime.date.today())
     to_day =  datetime.date.today()
+    print(type(to_day))
     #print(df['Date'] == to_day)
-    print(df["Date" == pd.Timestamp(to_day)])
-
+    print(df.dtypes)
 
 read_excel()

@@ -1,5 +1,13 @@
 # Get month and year from file name 230117 Payment Summary - 2023-01-18T085845.454.xlsx
 def getMonthYear(filename):
+    """
+    Extract the month and year from the file name
+    Parameters:
+        filename: file name
+    Returns:
+        new_file_name: new file name
+    """
+
     import re
     import pandas as pd
     # filename = '230117 Payment Summary - 2023-01-18T085845.454.xlsx'

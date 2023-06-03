@@ -10,7 +10,7 @@ def getMonthYear(filename):
 
     import re
     import pandas as pd
-    # filename = '230117 Payment Summary - 2023-01-18T085845.454.xlsx'
+    
     # Extract the month and year from the file name
     match = re.search(r'(\d{4})-(\d{2})', filename)
     year = match.group(1)

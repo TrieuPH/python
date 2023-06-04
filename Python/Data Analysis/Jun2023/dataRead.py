@@ -1,45 +1,58 @@
-import pandas as pd
-import os
-import glob
-
-def loadDataExcel(directory , dataCateName, sheet_name, usecols, skiprows):
+# def excel2csv
+def DataCate(CateFileDir):
     """
-    Load data from excel file
-    Parameters:
-        directory: directory of excel file
-        dataCateName: excel DataCate file name, not include extension
-    Returns:
-        df: dataframe
+    Read DataCate.xlsx file and return a dataframe
+    Parameters
+    ----------
+    CateFileDir : str
+        The directory of DataCate.xlsx file
+        Ex: C:\Users\User\DataCate.xlsx
+    ----------
+    Returns
+    df_cate : dataframe
     """
-
-    # check if excel files exist in folder
-    file_path = os.path.join(directory , dataCateName)
-    print(f"file_path: ", file_path)
-    if os.path.exists(file_path):
-        print('Excel files exist in folder')
-        excel_files = glob.glob(file_path)
+    import pandas as pd
+    # check current os
+    import os
+    if os.name == 'posix':
+        # print('posix')
+        datacate_dict = r'/Users/trieupham/OneDrive - BTM Global Consulting/Projects/github/python/Python/Data Analysis'
     else:
-        print(f'Excel files do not exist in folder {file_path}')
-        #excel_files = glob.glob(os.path.join(directory2, '*.xlsx'))
-        pass
-    try:
-        # use cols 0, Barcode; 2, Category Name
-        # use cols 0, Barcode; 3, SubCategory Name
-        # use both Category Name and SubCategory Name
-        df = pd.read_excel(file_path, sheet_name=sheet_name, usecols=usecols, skiprows=skiprows)
-        return df
-        pass
-    except FileNotFoundError:
-        print('File not found')
-        pass
+        # datacate_dict = r'C:\Users\trieu.pham\OneDrive - BTM Global Consulting\Projects\github\python\Python\Data Analysis'
+        datacate_dict = r'C:\Users\Trieu Pham\OneDrive - BTM Global Consulting\Projects\github\python\python\Data Analysis'
+        
+    datacate_filename = r'DataCate.xlsx'
+    df_cate = pd.read_excel(CateFileDir,sheet_name='Sheet1', usecols=[0,2,3], skiprows=0)
+    return df_cate
 
-if __name__ == '__main__':
-    # dataHandle(sourcefolder, destfolder, cate_dir)
-    datacate_dict = r'C:\Users\trieu.pham\OneDrive - BTM Global Consulting\Projects\github\python\Python\Data Analysis'
-    datacate_filename = r'DataCate'
-    df_cate = loadDataExcel(datacate_dict, datacate_filename)
-    print(df_cate)
-    # print("TESTING")
-    # print(os.path.join(datacate_dict , datacate_filename + '.xlsx'))
+def DataPayment(DataPaymentDir):
+    """
+    Read DataPayment.xlsx file and return a dataframe that contains all the data
+    ----------
+    Parameters
+    DataPaymentDir : str
+        The directory of DataPayment.xlsx file
+        Ex: C:\Users\User\DataPayment
+    ----------
+    Returns
+    df : dataframe
+    """
+    import pandas as pd
+    import glob
+    # Get the list of excel files in the source folder
+    excel_files = glob.glob(DataPaymentDir + "/*.xlsx")
+    # Loop through the list of excel files
+    for file in excel_files:
+        # Read the excel file
+        df_payment = pd.read_excel(file, 'Sheet2', usecols=[0,2,4,6,7],skiprows=2)
+        df = df.append(df_payment)
+    return df
 
-    pass
+def ToCsv(df, filename, dir):
+    import pandas as pd # Read the first line of the file
+    output_file = dir + '/' + filename + '.csv'
+    with open(output_file, 'r') as f:
+        first_line = f.readline().strip()
+    # Check if the first line contains the expected column names
+    has_headers = 'InvoiceID' in first_line
+    df.to_csv(output_file ,mode ='a', header = not has_headers, index=False)

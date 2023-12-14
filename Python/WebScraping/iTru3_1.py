@@ -7,3 +7,12 @@ print(result.content.decode())
 # export result.content.decode() to text file
 with open('iTru3_1.txt', 'w', encoding='utf-8') as f:
     f.write(result.content.decode())
+# export all links to text file
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(result.content.decode(), 'html.parser')
+links = soup.find_all('a')
+for link in links:
+    print(link.get('href'))
+with open('iTru3_2.txt', 'w', encoding='utf-8') as f:
+    for link in links:
+        f.write(link.get('href') + '\n')
